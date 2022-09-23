@@ -77,62 +77,76 @@ function addProductToBasketArray (productId) {
 function basketProductsGenerator (userBasketArray) {
     bastekProductsContainer.innerHTML = ''
 
-    userBasketArray.forEach (function (product) {
+    
+// ***********append && createElemnt  method
 
-        let basketProductContainer = $.createElement('div')
-        basketProductContainer.classList.add('cart-row')
+    // userBasketArray.forEach (function (product) {
 
-        let basketProductDetailsContainer = $.createElement('div')
-        basketProductDetailsContainer.className = 'cart-item cart-column'
+    //     let basketProductContainer = $.createElement('div')
+    //     basketProductContainer.classList.add('cart-row')
 
-        let basketProductImg = $.createElement('img')
-        basketProductImg.setAttribute('src', product.img)
-        basketProductImg.setAttribute('width', "100")
-        basketProductImg.setAttribute('height', "100")
-        basketProductImg.classList.add('cart-item-image')
+    //     let basketProductDetailsContainer = $.createElement('div')
+    //     basketProductDetailsContainer.className = 'cart-item cart-column'
 
-        let basketProductTitleSpan = $.createElement('span')
-        basketProductTitleSpan.classList.add('cart-item-title')
-        basketProductTitleSpan.innerHTML = product.title
+    //     let basketProductImg = $.createElement('img')
+    //     basketProductImg.setAttribute('src', product.img)
+    //     basketProductImg.setAttribute('width', "100")
+    //     basketProductImg.setAttribute('height', "100")
+    //     basketProductImg.classList.add('cart-item-image')
 
-        basketProductDetailsContainer.append(basketProductImg, basketProductTitleSpan)
+    //     let basketProductTitleSpan = $.createElement('span')
+    //     basketProductTitleSpan.classList.add('cart-item-title')
+    //     basketProductTitleSpan.innerHTML = product.title
 
-        let basketProductPriceSpan = $.createElement('span')
-        basketProductPriceSpan.className = 'cart-price cart-column'
-        basketProductPriceSpan.innerHTML = product.price
+    //     basketProductDetailsContainer.append(basketProductImg, basketProductTitleSpan)
 
-        let basketProductInputsContainer = $.createElement('div')
-        basketProductInputsContainer.className = 'cart-quantity cart-column'
+    //     let basketProductPriceSpan = $.createElement('span')
+    //     basketProductPriceSpan.className = 'cart-price cart-column'
+    //     basketProductPriceSpan.innerHTML = product.price
 
-        let basketProductInput = $.createElement('input')
-        basketProductInput.className = 'cart-quantity-input'
-        // basketProductInput.value = '1'
-        basketProductInput.value = product.count
-        basketProductInput.addEventListener('change', function(){
-            updateProductCount (product.id, basketProductInput.value)
-        })
+    //     let basketProductInputsContainer = $.createElement('div')
+    //     basketProductInputsContainer.className = 'cart-quantity cart-column'
 
-
-
-        basketProductInput.setAttribute('type', 'number')
-
-        let basketProductRemoveBtn = $.createElement('button')
-        basketProductRemoveBtn.className = 'btn btn-danger'
-        basketProductRemoveBtn.innerHTML = 'Remove'
-        basketProductRemoveBtn.addEventListener('click', function(){
-            removeProductFromBasket(product.id)
-        })
+    //     let basketProductInput = $.createElement('input')
+    //     basketProductInput.className = 'cart-quantity-input'
+    //     // basketProductInput.value = '1'
+    //     basketProductInput.value = product.count
+    //     basketProductInput.addEventListener('change', function(){
+    //         updateProductCount (product.id, basketProductInput.value)
+    //     })
 
 
-        basketProductInputsContainer.append(basketProductInput, basketProductRemoveBtn)
 
-        basketProductContainer.append(basketProductDetailsContainer, basketProductPriceSpan, basketProductInputsContainer)
+    //     basketProductInput.setAttribute('type', 'number')
 
-        bastekProductsContainer.append(basketProductContainer)
+    //     let basketProductRemoveBtn = $.createElement('button')
+    //     basketProductRemoveBtn.className = 'btn btn-danger'
+    //     basketProductRemoveBtn.innerHTML = 'Remove'
+    //     basketProductRemoveBtn.addEventListener('click', function(){
+    //         removeProductFromBasket(product.id)
+    //     })
+
+
+    //     basketProductInputsContainer.append(basketProductInput, basketProductRemoveBtn)
+
+    //     basketProductContainer.append(basketProductDetailsContainer, basketProductPriceSpan, basketProductInputsContainer)
+
+    //     bastekProductsContainer.append(basketProductContainer)
 
         
-        // console.log(bastekProductsContainer);
+    //     // console.log(bastekProductsContainer);
 
+    // })
+
+    userBasketArray.forEach (function (product) {
+
+        // ****** insertAdjacentHTML method
+
+        bastekProductsContainer.insertAdjacentHTML('beforeend', '<div class="cart-row"><div class="cart-item cart-column"><img src="'+ product.img +'" width="100" height="100" class="cart-item-image"><span class="cart-item-title"> '+ product.title + ' </span></div><span class="cart-price cart-column">'+ product.price + '</span><div class="cart-quantity cart-column"><input class="cart-quantity-input" type="number"  ><button class="btn btn-danger" onclick="removeProductFromBasket('+product.id+')">Remove</button></div></div>')
+        
+        
+        
+        // onchange="updateProductCount ('+product.id +', '+ basketProductInput.value+')" 
     })
 }
 
